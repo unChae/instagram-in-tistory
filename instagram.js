@@ -1,5 +1,5 @@
 async function fetchData() {
-    token = "token 값 입력"
+    token = "토큰 값 입력"
 
     url = "https://graph.instagram.com/me/media?";
     url += "fields=id,media_type,media_url,username,timestamp,caption&access_token=" + token;
