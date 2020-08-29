@@ -1,6 +1,6 @@
 async function fetchData() {
     // 토큰 값 입력
-    token = "IGQVJVblRTZAlhNZAVpGYUx1QkhmREN2eUp4WkFZAOGxiRTlfRHdEZAHk3WDZAnWE13allOdWVBcExsSTY5XzVQS0pjbmh0dWJlRTFyZAklUUHM5X0lkV1dEYTgxTmVCNU16MEtRTEN1WEF3WjU0blg4bVhJWAZDZD"
+    token = "토큰 값을 입력해주세요"
 
     // 인스타그램 요청 api 주소
     url = "https://graph.instagram.com/me/media?";
