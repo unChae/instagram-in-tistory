@@ -6,7 +6,9 @@
     <script type="text/javascript" src="./instagram.js"></script>
 </head>
 <!-- body 태그 생성될 때(onload) instagram.js의 fetchData 함수 실행 -->
-<body onload="fetchData();">
+<body onload="">
+    <Button onclick="getAccessToken();">getAccessToken</Button>
+    <Button onclick="fetchData();">getData</Button>
     <!-- 데이터를 받아오고 나서 li 태그가 추가 될 ul 태그 생성 -->
     <ul id="itemlist" style="padding:0;list-style:none;"></ul>
 </body>

@@ -1,7 +1,29 @@
-async function fetchData() {
-    // 토큰 값 입력
-    token = "토큰 값을 입력해주세요"
+var token = "";
 
+async function getAccessToken() {
+    let url = "https://api.instagram.com/oauth/access_token";
+
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData();
+    formData.append('client_id', '');
+    formData.append('client_secret', '');
+    formData.append('grant_type', 'authorization_code');
+    formData.append('redirect_uri', '');
+    formData.append('code', '');
+    xhr.onload = await function() {
+        if (xhr.status === 200 || xhr.status === 201) {
+            token = eval("("+xhr.responseText+")");
+            token = token.access_token;
+        } else {
+            console.error(xhr.responseText);
+        }
+    };
+    xhr.open('POST', url);
+    xhr.send(formData); // 폼 데이터 객체 전송
+}
+
+async function fetchData() {
+    console.log(token);
     // 인스타그램 요청 api 주소
     url = "https://graph.instagram.com/me/media?";
     // 내가 받아오고 싶은 내용 fields 파라매터에 추가 & 토큰 값 함께 전송
@@ -20,7 +42,8 @@ async function fetchData() {
     .then(response => response.json())
     
     res.push(itemData)
-    if(itemData.paging.next) {
+    
+    try{
         url = itemData.paging.next
         while(true) {
             let nextData = await fetch(url, {
@@ -37,9 +60,12 @@ async function fetchData() {
                 break;
             }
             url = nextData.paging.next;
-        }
-    }
+            }
 
+    }catch(err){
+        console.log("no data")
+    }
+    
     // index.html에 있는 ul 객체 생성
     let itemlist = document.getElementById("itemlist");
 
