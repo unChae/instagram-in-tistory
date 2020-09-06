@@ -3,15 +3,21 @@ var token = "";
 async function getAccessToken() {
     let url = "https://api.instagram.com/oauth/access_token";
 
+    // axios나 fetch를 사용하면 cors문제로 토큰값을 받아올 수 없어서 XMLHttpRequest를 사용했다
     var xhr = new XMLHttpRequest();
     var formData = new FormData();
+    // 개발자 계정 client_id
     formData.append('client_id', '');
+    // 개발자 계정 client_secret
     formData.append('client_secret', '');
     formData.append('grant_type', 'authorization_code');
+    // 개발자 계정에 등록되어있는 redirect uri 값
     formData.append('redirect_uri', '');
+    // 접근한 사용자의 code값
     formData.append('code', '');
     xhr.onload = await function() {
         if (xhr.status === 200 || xhr.status === 201) {
+            // string으로 값이 넘어와서 spring => json 형변환
             token = eval("("+xhr.responseText+")");
             token = token.access_token;
         } else {
@@ -19,7 +25,8 @@ async function getAccessToken() {
         }
     };
     xhr.open('POST', url);
-    xhr.send(formData); // 폼 데이터 객체 전송
+    // 폼 데이터 객체 전송
+    xhr.send(formData); 
 }
 
 async function fetchData() {
